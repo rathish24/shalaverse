@@ -15,6 +15,8 @@ Shalaverse follows **Vertical Slice Architecture** paired with **Feature-First C
 
 ## 2. Directory Structure
 
+### 2.1 Source Code (`lib/`)
+
 ```
 lib/
 ├── main.dart                          # App entry point
@@ -54,6 +56,29 @@ lib/
     ├── profile/                       # User Profiles & Settings
     ├── settings/                      # App Preferences & Theme/Lang Selectors
     └── player/                        # Video / Google Meet Session Integration
+```
+
+### 2.2 Test Code (`test/`)
+
+```
+test/
+├── app/
+│   └── app_router_test.dart           # Navigation & Route Guard Tests
+│
+├── core/                              # Infrastructure Unit Tests
+│   ├── network/
+│   │   └── api_client_test.dart
+│   └── utils/
+│       └── validators_test.dart
+│
+└── features/                          # Feature Unit & Widget Tests (Mirrors lib/ 1-to-1)
+    ├── auth/
+    │   ├── auth_bloc_test.dart        # BLoC State Transition Tests
+    │   └── auth_repository_test.dart  # Data Layer Tests
+    └── player/
+        ├── player_bloc_test.dart
+        ├── player_repository_test.dart
+        └── player_screen_widget_test.dart # Widget Interaction Tests
 ```
 
 ---
