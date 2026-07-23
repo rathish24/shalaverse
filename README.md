@@ -1,14 +1,24 @@
 # Shalaverse 🎓✨
 
-**Shalaverse** is a cross-platform application built with [Flutter](https://flutter.dev/).
+**Shalaverse** is a cross-platform educational institution management application built with [Flutter](https://flutter.dev/). It streamlines class scheduling, virtual learning via Google Meet, automated attendance, delay notifications, and parent engagement across schools, coaching centers, and academies.
+
+---
+
+## 📚 Documentation & Specifications
+
+* 📋 **[Product Requirements Document (PRD)](REQUIREMENTS.md)**: Full functional specifications, user role matrix (Admin, Teacher, Student, Parent), class lifecycle state machine, 15-min reminders, 5-min delay alert logic, attendance confirmation, and query resolution pipeline.
+* 🤖 **[AI Agent Rules & Guidelines](.agents/AGENTS.md)**: Coding standards, Clean Architecture guidelines, state machine enums, and RBAC code enforcement rules for AI assistants working in this repository.
 
 ---
 
 ## 🚀 Features & Overview
 
 - **Cross-Platform**: Designed to run seamlessly across Android, iOS, Web, macOS, Windows, and Linux.
-- **Modern UI**: Powered by Material Design 3 and Flutter.
-- **Scalable Architecture**: Structured for clean, modular development and easy extension.
+- **Role-Based Workflows**: Tailored interfaces for Administrators, Teachers, Students, and Parents.
+- **Google Meet Integration**: Synchronized virtual classrooms with teacher-managed session initiation.
+- **Automated Punctuality & Tracking**: Automated 15-minute class reminders and 5-minute non-start delay alerts.
+- **Attendance Engine**: Auto-tracked teacher start time and post-class manual student attendance (`Present`, `Absent`, `Late`, `Excused`).
+- **Parent Remarks & Queries**: Contextual remark submission for completed classes and general support query tracking.
 
 ---
 
@@ -17,6 +27,8 @@
 - **Framework**: [Flutter](https://flutter.dev/) (SDK `^3.11.0`)
 - **Language**: [Dart](https://dart.dev/)
 - **UI Framework**: Material Design 3
+- **State Management**: BLoC Pattern (`package:flutter_bloc`)
+- **Routing**: `go_router`
 
 ### Prerequisites
 
@@ -90,7 +102,7 @@ flutter build web --dart-define=APP_FLAVOR=prod --release
 
 ## 🧪 Testing & Quality Assurance
 
-Run project tests:
+Run project unit and widget tests:
 ```bash
 flutter test
 ```
@@ -106,6 +118,7 @@ flutter analyze
 
 ```
 shalaverse/
+├── .agents/          # AI agent skills & project rules (AGENTS.md)
 ├── android/          # Android native project configuration & code
 ├── ios/              # iOS native project configuration & code
 ├── lib/              # Main Dart application source code
@@ -114,8 +127,9 @@ shalaverse/
 ├── web/              # Web platform assets & configuration
 ├── windows/          # Windows desktop platform code
 ├── linux/            # Linux desktop platform code
+├── REQUIREMENTS.md   # Product Requirement Document & Functional Specs
 ├── pubspec.yaml      # Project dependencies & assets configuration
-└── README.md         # Project documentation
+└── README.md         # Developer landing page & setup guide
 ```
 
 ---
