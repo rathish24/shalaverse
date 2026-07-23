@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "836243161087",
+    "project_id": "shalaverse",
+    "storage_bucket": "shalaverse.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:836243161087:android:ecd88a9ffcece26a24b1ca",
+        "android_client_info": {
+          "package_name": "com.shalaverse.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDT6pk_y3RGLWZThExjtfXobb1vjT2RMwM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
