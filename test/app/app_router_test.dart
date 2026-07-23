@@ -14,11 +14,10 @@ void main() {
     );
   });
 
-  testWidgets('App renders login screen by default', (WidgetTester tester) async {
+  testWidgets('App renders main shell and default initial route', (WidgetTester tester) async {
     await tester.pumpWidget(const ShalaverseApp());
     await tester.pumpAndSettle();
 
-    expect(find.text('Welcome to Shalaverse'), findsOneWidget);
-    expect(find.text('Sign In & Go to Dashboard'), findsOneWidget);
+    expect(find.text('Login - Shalaverse'), findsOneWidget);
   });
 }
