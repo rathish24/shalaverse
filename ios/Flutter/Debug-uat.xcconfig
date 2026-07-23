@@ -1,0 +1,4 @@
+#include "Debug.xcconfig"
+
+APP_DISPLAY_NAME = Shalaverse UAT
+PRODUCT_BUNDLE_IDENTIFIER = com.shalaverse.app.uat

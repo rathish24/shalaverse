@@ -28,6 +28,31 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        resValue("string", "app_name", "Shalaverse")
+    }
+
+    flavorDimensions += "default"
+
+    productFlavors {
+        create("dev") {
+            dimension = "default"
+            applicationIdSuffix = ".dev"
+            resValue("string", "app_name", "Shalaverse Dev")
+        }
+        create("uat") {
+            dimension = "default"
+            applicationIdSuffix = ".uat"
+            resValue("string", "app_name", "Shalaverse UAT")
+        }
+        create("stage") {
+            dimension = "default"
+            applicationIdSuffix = ".stage"
+            resValue("string", "app_name", "Shalaverse Stage")
+        }
+        create("prod") {
+            dimension = "default"
+            resValue("string", "app_name", "Shalaverse")
+        }
     }
 
     buildTypes {

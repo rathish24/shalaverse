@@ -1,0 +1,4 @@
+#include "Debug.xcconfig"
+
+APP_DISPLAY_NAME = Shalaverse Stage
+PRODUCT_BUNDLE_IDENTIFIER = com.shalaverse.app.stage
