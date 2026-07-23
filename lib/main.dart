@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'config/app_config.dart';
 
 void main() {
-  const flavorName = String.fromEnvironment('FLUTTER_APP_FLAVOR', defaultValue: 'dev');
+  final String flavorName = appFlavor ??
+      const String.fromEnvironment('APP_FLAVOR', defaultValue: 'dev');
   final AppFlavor flavor = AppFlavor.values.firstWhere(
-    (f) => f.name == flavorName,
+    (f) => f.name.toLowerCase() == flavorName.toLowerCase(),
     orElse: () => AppFlavor.dev,
   );
 
