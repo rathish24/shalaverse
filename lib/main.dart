@@ -1,11 +1,29 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'app/app.dart';
 import 'config/app_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+
+  try {
+    if (kIsWeb) {
+      await Firebase.initializeApp(
+        options: const FirebaseOptions(
+          apiKey: String.fromEnvironment('FIREBASE_API_KEY', defaultValue: 'demo-api-key'),
+          appId: String.fromEnvironment('FIREBASE_APP_ID', defaultValue: '1:123456789:web:shalaverse'),
+          messagingSenderId: String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID', defaultValue: '123456789'),
+          projectId: String.fromEnvironment('FIREBASE_PROJECT_ID', defaultValue: 'shalaverse-app'),
+        ),
+      );
+    } else {
+      await Firebase.initializeApp();
+    }
+  } catch (e) {
+    debugPrint('Firebase initialization notice: $e');
+  }
 
   // Detect flavor from native `--flavor` flag (appFlavor) or `--dart-define=APP_FLAVOR=...`
   final String rawFlavor = appFlavor ??
@@ -29,93 +47,5 @@ void main() async {
 
   AppConfig.initialize(config);
 
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final config = AppConfig.instance;
-
-    return MaterialApp(
-      title: config.appName,
-      debugShowCheckedModeBanner: !config.flavor.isProd,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: switch (config.flavor) {
-            AppFlavor.dev => Colors.blue,
-            AppFlavor.uat => Colors.orange,
-            AppFlavor.stage => Colors.purple,
-            AppFlavor.prod => Colors.deepPurple,
-          },
-        ),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final config = AppConfig.instance;
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(config.appName),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Chip(
-              avatar: Icon(
-                switch (config.flavor) {
-                  AppFlavor.dev => Icons.developer_mode,
-                  AppFlavor.uat => Icons.bug_report,
-                  AppFlavor.stage => Icons.fact_check,
-                  AppFlavor.prod => Icons.verified,
-                },
-                size: 18,
-              ),
-              label: Text('Environment: ${config.flavor.name.toUpperCase()}'),
-            ),
-            const SizedBox(height: 8),
-            Text('API Base URL: ${config.apiBaseUrl}'),
-            Text('Bundle ID: ${config.bundleId}'),
-            const SizedBox(height: 24),
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
-    );
-  }
+  runApp(const ShalaverseApp());
 }
