@@ -62,6 +62,8 @@ lib/
 
 ```
 test/
+├── widget_test.dart                   # Root App Startup & Smoke Test (ShalaverseApp)
+│
 ├── app/
 │   └── app_router_test.dart           # Navigation & Route Guard Tests
 │
