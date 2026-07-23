@@ -88,8 +88,26 @@ flutter run -d chrome --dart-define=APP_FLAVOR=uat
 flutter run -d chrome
 ```
 
-### 4. Declarative Routing & Launch
-Navigation is powered by `AppRouter` (`lib/app/app_router.dart`). Role-based access control (RBAC) guards automatically restrict navigation based on user permissions (e.g., Parent accounts are blocked from accessing Google Meet session routes).
+### 4. Declarative Routing & Direct CLI Screen Launch
+
+Navigation is powered by `AppRouter` (`lib/app/app_router.dart`). Role-based access control (RBAC) guards automatically restrict navigation based on user permissions.
+
+#### Direct Screen Launch from CLI (`--dart-define=INITIAL_ROUTE=...`)
+During development, feature testing, or UI previewing, you can bypass login and launch directly into any target screen by passing `--dart-define=INITIAL_ROUTE=<path>` from the terminal:
+
+```bash
+# Launch directly into Schedule Screen
+flutter run --flavor dev --dart-define=INITIAL_ROUTE=/schedule
+
+# Launch directly into Profile Screen
+flutter run --flavor dev --dart-define=INITIAL_ROUTE=/profile
+
+# Launch directly into Home Screen
+flutter run --flavor dev --dart-define=INITIAL_ROUTE=/home
+
+# Web (Google Chrome) direct screen launch
+flutter run -d chrome --dart-define=INITIAL_ROUTE=/schedule
+```
 
 ### 5. Build Bundles by Flavor
 ```bash
