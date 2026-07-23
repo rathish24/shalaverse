@@ -3,10 +3,14 @@ import 'package:flutter/services.dart';
 import 'config/app_config.dart';
 
 void main() {
-  final String flavorName = appFlavor ??
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Detect flavor from native `--flavor` flag (appFlavor) or `--dart-define=APP_FLAVOR=...`
+  final String rawFlavor = appFlavor ??
       const String.fromEnvironment('APP_FLAVOR', defaultValue: 'dev');
+
   final AppFlavor flavor = AppFlavor.values.firstWhere(
-    (f) => f.name.toLowerCase() == flavorName.toLowerCase(),
+    (f) => f.name.toLowerCase() == rawFlavor.toLowerCase(),
     orElse: () => AppFlavor.dev,
   );
 
@@ -21,12 +25,8 @@ void main() {
         : 'com.shalaverse.app.${flavor.name}',
   );
 
-  mainWithConfig(config);
-}
-
-void mainWithConfig(AppConfig config) {
-  WidgetsFlutterBinding.ensureInitialized();
   AppConfig.initialize(config);
+
   runApp(const MyApp());
 }
 

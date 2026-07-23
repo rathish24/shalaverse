@@ -42,28 +42,48 @@ flutter pub get
 
 ### 3. Run with Build Flavors (`dev`, `uat`, `stage`, `prod`)
 
-Run with a specific flavor and target entrypoint:
+All environments use the single entry point `lib/main.dart`:
+
+#### Mobile / Native Platforms (iOS & Android)
 ```bash
 # Development
-flutter run --flavor dev -t lib/main_dev.dart
+flutter run --flavor dev
 
 # UAT
-flutter run --flavor uat -t lib/main_uat.dart
+flutter run --flavor uat
 
 # Staging
-flutter run --flavor stage -t lib/main_stage.dart
+flutter run --flavor stage
 
 # Production
-flutter run --flavor prod -t lib/main_prod.dart
+flutter run --flavor prod
 ```
 
-### 4. Build APKs / Bundles by Flavor
+#### Web (Google Chrome)
+```bash
+# Production
+flutter run -d chrome --dart-define=APP_FLAVOR=prod
+
+# Staging
+flutter run -d chrome --dart-define=APP_FLAVOR=stage
+
+# UAT
+flutter run -d chrome --dart-define=APP_FLAVOR=uat
+
+# Development (default)
+flutter run -d chrome
+```
+
+### 4. Build Bundles by Flavor
 ```bash
 # Android APKs
-flutter build apk --flavor dev -t lib/main_dev.dart
-flutter build apk --flavor uat -t lib/main_uat.dart
-flutter build apk --flavor stage -t lib/main_stage.dart
-flutter build apk --flavor prod -t lib/main_prod.dart
+flutter build apk --flavor dev
+flutter build apk --flavor uat
+flutter build apk --flavor stage
+flutter build apk --flavor prod
+
+# Web Release
+flutter build web --dart-define=APP_FLAVOR=prod --release
 ```
 
 ---
